@@ -56,7 +56,7 @@ namespace SeleniumTests
         public void TestAddressBookAccess()
         {
             driver.Navigate().GoToUrl(baseURL);
-            Assert.That(driver.Title, Does.Contain("Address Book"));
+            Assert.That(driver.Title, Does.Contain("Address book"));
         }
     }
 }
