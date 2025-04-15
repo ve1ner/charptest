@@ -24,7 +24,7 @@ namespace SeleniumTests
             var options = new ChromeOptions();
 
             options.BinaryLocation = @"C:\Program Files\Google\Chrome\Application\chrome.exe";
-            driver = new ChromeDriver(@"C:\Users\veiner\Documents\drive\", options); // Путь к chromedriver.exe
+            driver = new ChromeDriver(@"C:\Users\veiner\Documents\drive\", options); 
 
             baseURL = "http://localhost/addressbook/";
             verificationErrors = new StringBuilder();
@@ -42,7 +42,7 @@ namespace SeleniumTests
             }
             catch (Exception)
             {
-                // Игнорируем ошибки при закрытии
+             
             }
             Assert.That(verificationErrors.ToString(), Is.Empty, verificationErrors.ToString());
         }
