@@ -52,6 +52,7 @@ namespace SeleniumTests
         {
             driver.Navigate().GoToUrl(baseURL);
             Assert.That(driver.Title, Does.Contain("Address book"));
+
         }
     }
 }
