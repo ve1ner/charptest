@@ -21,19 +21,14 @@ namespace SeleniumTests
         [SetUp]
         public void SetupTest()
         {
-            // Настройка ChromeOptions
             var options = new ChromeOptions();
 
-            // Указание пути к Chrome for Testing
             options.BinaryLocation = @"C:\Program Files\Google\Chrome\Application\chrome.exe";
-
-            // Инициализация драйвера
             driver = new ChromeDriver(@"C:\Users\veiner\Documents\drive\", options); // Путь к chromedriver.exe
 
             baseURL = "http://localhost/addressbook/";
             verificationErrors = new StringBuilder();
 
-            // Опциональные настройки
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
             driver.Manage().Window.Maximize();
         }
