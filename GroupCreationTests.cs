@@ -11,10 +11,10 @@ using Assert = NUnit.Framework.Assert;
 
 
 
-namespace SeleniumTests
+namespace WebAddressBookTests
 {
     [TestFixture]
-    public class AddressBookWebTests
+    public class GroupCreationTests
     {
         private IWebDriver driver = null!;
         private StringBuilder verificationErrors = null!;
@@ -50,7 +50,7 @@ namespace SeleniumTests
         }
 
         [Test]
-        public void TestAddressBookAccess()
+        public void GroupCreationTest()
         {
             driver.Navigate().GoToUrl(baseURL);
             driver.FindElement(By.Name("user")).Click();
