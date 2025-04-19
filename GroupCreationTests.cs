@@ -1,4 +1,5 @@
 using System;
+using System.ComponentModel.DataAnnotations;
 using System.Diagnostics.CodeAnalysis;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -40,7 +41,7 @@ namespace WebAddressBookTests
         {
             try
             {
-                //driver?.Quit();
+                driver?.Quit();
             }
             catch (Exception)
             {
@@ -68,9 +69,29 @@ namespace WebAddressBookTests
             Assert.That(actualText[0], Is.EqualTo('A'));
         }
 
+        [Test]
+        public void ContactCreationTest()
+        {
+            GoHomePage();
+            Login(new AccountData("admin", "secret"));
+            GoToContactsPage();
+            ContactData contact = new ContactData("Vadim", "Barubin");
+            contact.Nickname = "veiner";
+            contact.Homepage = "t.me/veiner";
+            contact.Address = "Krasnodar";
+            contact.Email = "veiner@yandex-team.ru";
+            contact.Title = "QA";
+            FillContactForm(contact);
+            SubmitContactCreation();
+        }
+
         private void SubmitGroupCreation()
         {
             driver.FindElement(By.XPath("//input[@value='Enter information']")).Click();
+        }
+        private void SubmitContactCreation()
+        {
+            driver.FindElement(By.XPath("//input[@name='submit']")).Click();
         }
 
         private void FillGroupForm(GroupData group)
@@ -83,6 +104,64 @@ namespace WebAddressBookTests
             driver.FindElement(By.XPath("//textarea[@name='group_footer']")).SendKeys(group.Footer);
         }
 
+        private void FillContactForm(ContactData contact)
+        {
+            driver.FindElement(By.XPath("//input[@name='firstname']")).Click();
+            driver.FindElement(By.XPath("//input[@name='firstname']")).SendKeys(contact.FName);
+            driver.FindElement(By.XPath("//input[@name='middlename']")).Click();
+            driver.FindElement(By.XPath("//input[@name='middlename']")).SendKeys(contact.MName);
+            //last
+            driver.FindElement(By.XPath("//input[@name='lastname']")).Click();
+            driver.FindElement(By.XPath("//input[@name='lastname']")).SendKeys(contact.LName);
+            //nick
+            driver.FindElement(By.XPath("//input[@name='nickname']")).Click();
+            driver.FindElement(By.XPath("//input[@name='nickname']")).SendKeys(contact.Nickname);
+            //photo
+            //filedrop in progress
+            //title
+            driver.FindElement(By.XPath("//input[@name='title']")).Click();
+            driver.FindElement(By.XPath("//input[@name='title']")).SendKeys(contact.Title);
+            //company
+            driver.FindElement(By.XPath("//input[@name='company']")).Click();
+            driver.FindElement(By.XPath("//input[@name='company']")).SendKeys(contact.Company);
+            //address
+            driver.FindElement(By.XPath("//textarea[@name='address']")).Click();
+            driver.FindElement(By.XPath("//textarea[@name='address']")).SendKeys(contact.Address);
+            //telephones
+            //home
+            driver.FindElement(By.XPath("//input[@name='home']")).Click();
+            driver.FindElement(By.XPath("//input[@name='home']")).SendKeys(contact.THome);
+            //mobile
+            driver.FindElement(By.XPath("//input[@name='mobile']")).Click();
+            driver.FindElement(By.XPath("//input[@name='mobile']")).SendKeys(contact.TMobile);
+            //work
+            driver.FindElement(By.XPath("//input[@name='work']")).Click();
+            driver.FindElement(By.XPath("//input[@name='work']")).SendKeys(contact.TWork);
+            //work
+            driver.FindElement(By.XPath("//input[@name='fax']")).Click();
+            driver.FindElement(By.XPath("//input[@name='fax']")).SendKeys(contact.Fax);
+            //emails
+            //first
+            driver.FindElement(By.XPath("//input[@name='email']")).Click();
+            driver.FindElement(By.XPath("//input[@name='email']")).SendKeys(contact.Email);
+            //second
+            driver.FindElement(By.XPath("//input[@name='email2']")).Click();
+            driver.FindElement(By.XPath("//input[@name='email2']")).SendKeys(contact.Email2);
+            //third
+            driver.FindElement(By.XPath("//input[@name='email3']")).Click();
+            driver.FindElement(By.XPath("//input[@name='email3']")).SendKeys(contact.Email3);
+            //homepage/
+            driver.FindElement(By.XPath("//input[@name='homepage']")).Click();
+            driver.FindElement(By.XPath("//input[@name='homepage']")).SendKeys(contact.Homepage);
+            //bday
+            //data in progress
+            //anniversary
+            //data in progress
+            //group
+            //dropdownlist in progress
+
+        }
+
         private void InitGroupCreation()
         {
             driver.FindElement(By.XPath("//input[@value='New group']")).Click();
@@ -91,7 +170,12 @@ namespace WebAddressBookTests
         private void GoToGroupsPage()
         {
             driver.FindElement(By.XPath("//*[@class='admin']")).Click();
-        }
+        } 
+
+        private void GoToContactsPage()
+        {
+            driver.FindElement(By.XPath("//a[text()='add new']")).Click();
+        } 
 
         private void Login(AccountData account)
         {
