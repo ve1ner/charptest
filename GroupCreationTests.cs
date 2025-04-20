@@ -75,7 +75,7 @@ namespace WebAddressBookTests
             GoHomePage();
             Login(new AccountData("admin", "secret"));
             GoToContactsPage();
-            ContactData contact = new ContactData("Vadim", "Barubin");
+            ContactData contact = new ContactData("Vadim", "Secret");
             contact.Nickname = "veiner";
             contact.Homepage = "t.me/veiner";
             contact.Address = "Krasnodar";
@@ -83,6 +83,55 @@ namespace WebAddressBookTests
             contact.Title = "QA";
             FillContactForm(contact);
             SubmitContactCreation();
+        }
+
+        [Test]
+        public void ExportAIOTest()
+        {
+            GoToBasePage();
+            LoginData login = new LoginData("admin", "secret");
+            login.Ghoul = "admin";
+            LLogin(login);
+            GoToExportPageSKibidi();
+            Exportdownload("CSV for Nokia");
+        }
+
+        private void Exportdownload(string type)
+        {
+            switch (type)
+            {
+                case "AIO":
+                    driver.FindElement(By.XPath("//form[.//label[contains(text(), 'All in one vCard')]]//input[@type='submit']")).Click();
+                    break;
+                case "vCards for Outlook":
+                    driver.FindElement(By.XPath("//form[.//label[contains(text(), 'All in one vCard')]]//input[@type='submit']")).Click();
+                    break;
+                case "CSV for Excel":
+                    driver.FindElement(By.XPath("//form[.//label[contains(text(), 'All in one vCard')]]//input[@type='submit']")).Click();
+                    break;
+                case "CSV for Nokia":
+                    driver.FindElement(By.XPath("//form[.//label[contains(text(), 'All in one vCard')]]//input[@type='submit']")).Click();
+                    break;
+            }
+        }
+
+        private void GoToExportPageSKibidi()
+        {
+            driver.FindElement(By.XPath("//*[@href='export.php']")).Click();
+        }
+
+        private void LLogin(LoginData login)
+        {
+            driver.FindElement(By.XPath("//input[@name='user']")).Click();
+            driver.FindElement(By.XPath("//input[@name='user']")).SendKeys(login.Username);
+            driver.FindElement(By.XPath("//input[@name='pass']")).Click();
+            driver.FindElement(By.XPath("//input[@name='pass']")).SendKeys(login.Password);
+            driver.FindElement(By.XPath("//input[@type='submit']")).Click();
+        }
+
+        private void GoToBasePage()
+        {
+            driver.Navigate().GoToUrl("http://localhost/addressbook/");
         }
 
         private void SubmitGroupCreation()
