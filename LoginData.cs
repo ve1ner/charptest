@@ -6,11 +6,10 @@ using System.Threading.Tasks;
 
 namespace WebAddressBookTests
 {
-    internal class LoginData
+    public class LoginData
     {
         private string user;
         private string pass;
-        private string zxc;
 
         public LoginData(string user, string pass)
         {
@@ -40,21 +39,6 @@ namespace WebAddressBookTests
                 user = value;
             }
         }
-        public string Ghoul
-        {
-            get
-            {
-                return zxc;
-            }
-            set
-            {
-                zxc = value;
-            }
-        }
+
     }
 }
-
-//string my info = LoginData.Password;
-//print(...) -> asd
-// LoginData.Password = "admin"
-// LoginData.Password = "user"
