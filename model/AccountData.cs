@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WebAddressBookTests
+namespace WebAddressbookTests
 {
     public class AccountData
     {
@@ -13,8 +13,8 @@ namespace WebAddressBookTests
 
         public AccountData(string username, string password)
         {
-            this.Username = username;
-            this.Password = password;
+            Username = username;
+            Password = password;
         }
 
         public string Username 
